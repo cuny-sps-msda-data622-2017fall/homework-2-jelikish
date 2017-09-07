@@ -6,29 +6,39 @@
 
 ### Data Pipeline using Python (13 points total)
 
-Build a data pipeline in Python that downloads data using the urls given below, trains a random forest model on the training dataset using sklearn and scores the model on the scoring dataset.
+Build a data pipeline in Python that downloads data using the urls given below, trains a random forest model on the training dataset using sklearn and scores the model on the test dataset.
+
+#### Scoring Rubric
+The homework will be scored based on code efficiency (hint: use functions, not stream of consciousness coding), code cleaniless, code reproducibility, and critical thinking (hint: commenting lets me know what you are thinking!)  
 
 #### Instructions:
-Submit the following 5 items on github.  The homework will be scored based on code efficiency (hint: use functions, not stream of consciousness coding), code cleaniless, code reproducibility, and critical thinking (hint: commenting lets me know what you are thinking!)  
+tl;dr: Submit the following 5 items on github.  
+- ReadMe.md (see "Critical Thinking")
+- requirements.txt
+- pull_data.py
+- train_model.py
+- score_model.py
+
+More details:
 
 - <b> requirements.txt </b> (1 point)
 
 This file documents all dependencies needed on top of the existing packages in the Docker Dataquest image from HW1.  When called upon using <i> pip install -r requirements.txt </i>, this will install all python packages needed to run the .py files.  (hint: use pip freeze to generate the .txt file)
 
-- <b> pull_data.py </b> (4 points)
+- <b> pull_data.py </b> (5 points)
 
-When this is called using <i> python pull_data.py </i> in the command line, this will using the 2 urls given below to go on the Kaggle website, authenticate using your own Kaggle sign on, pull the two datasets, and save as .csv files in the current local directory.  The authentication login details (aka secrets) need to be in a hidden folder (hint: use .gitignore).  There must be data check steps to ensure the data has been pulled correctly and clear commenting and documentation for each step inside the .py file.
+When this is called using <i> python pull_data.py </i> in the command line, this will go to the 2 Kaggle urls provided below, authenticate using your own Kaggle sign on, pull the two datasets, and save as .csv files in the current local directory.  The authentication login details (aka secrets) need to be in a hidden folder (hint: use .gitignore).  There must be a data check step to ensure the data has been pulled correctly and clear commenting and documentation for each step inside the .py file.
 
     Training dataset url: https://www.kaggle.com/c/titanic/download/train.csv
     Scoring dataset url: https://www.kaggle.com/c/titanic/download/test.csv
 
-- <b> train_model.py </b> (4 points)
+- <b> train_model.py </b> (5 points)
 
 When this is called using <i> python train_model.py </i> in the command line, this will take in the training dataset csv, perform the necessary data cleaning and imputation, and fit a random forest classifier to the dependent Y.  There must be data check steps and clear commenting for each step inside the .py file.  The output for running this file is the random forest model saved as a .pkl file in the local directory
 
-- <b> eda.ipynb </b> (2 points)
+- <b> eda.ipynb </b> (0 points)
 
-This supplements the commenting inside train_model.py.  This is the place to provide scratch work and plots to convince me why you did certain data imputations and manipulations inside the train_model.py file.
+[Optional] This supplements the commenting inside train_model.py.  This is the place to provide scratch work and plots to convince me why you did certain data imputations and manipulations inside the train_model.py file.
 
 - <b> score_model.py </b> (2 points)
 
