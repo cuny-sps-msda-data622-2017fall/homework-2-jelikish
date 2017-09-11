@@ -4,6 +4,12 @@
 - 15 points possible, worth 15% of your final grade
 
 
+### Required Reading
+Please come to class prepared to discuss.
+- Read Chapter 5 of the Deep Learning Book
+- Read Chapter 1 of the Agile Data Science 2.0 textbook
+
+
 ### Data Pipeline using Python (13 points total)
 
 Build a data pipeline in Python that downloads data using the urls given below, trains a random forest model on the training dataset using sklearn and scores the model on the test dataset.
@@ -34,7 +40,7 @@ When this is called using <i> python pull_data.py </i> in the command line, this
 
 - <b> train_model.py </b> (5 points)
 
-When this is called using <i> python train_model.py </i> in the command line, this will take in the training dataset csv, perform the necessary data cleaning and imputation, and fit a random forest classifier to the dependent Y.  There must be data check steps and clear commenting for each step inside the .py file.  The output for running this file is the random forest model saved as a .pkl file in the local directory
+When this is called using <i> python train_model.py </i> in the command line, this will take in the training dataset csv, perform the necessary data cleaning and imputation, and fit a classification model to the dependent Y.  There must be data check steps and clear commenting for each step inside the .py file.  The output for running this file is the random forest model saved as a .pkl file in the local directory.  Remember that the thought process and decision for why you chose the final model must be clearly documented in this section.  
 
 - <b> eda.ipynb </b> (0 points)
 
@@ -42,7 +48,7 @@ When this is called using <i> python train_model.py </i> in the command line, th
 
 - <b> score_model.py </b> (2 points)
 
-When this is called using <i> python score_model.py </i> in the command line, this will ingest the .pkl random forest file and apply the model to the locally saved scoring dataset csv.  There must be data check steps and clear commenting for each step inside the .py file.  The output for running this file is a csv file with the predicted score, as well as a png or text file output that contains the model accuracy report.  
+When this is called using <i> python score_model.py </i> in the command line, this will ingest the .pkl random forest file and apply the model to the locally saved scoring dataset csv.  There must be data check steps and clear commenting for each step inside the .py file.  The output for running this file is a csv file with the predicted score, as well as a png or text file output that contains the model accuracy report (e.g. sklearn's classification report or any other way of model evaluation).  
 
 
 ### Critical Thinking (2 points total)
