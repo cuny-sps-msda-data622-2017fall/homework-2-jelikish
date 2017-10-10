@@ -55,24 +55,22 @@ When this is called using <i> python score_model.py </i> in the command line, th
 
 Modify this ReadMe file to answer the following questions directly in place.
 
-1. If I had to join another data source with the training and testing/scoring datasets, what additional data validation steps would I need for the join? (0.5 points)
-
-I would put in checks to make sure the number of columns and the data types match the format so that the processes that wrangles the data later on before running ml part does not break. Maybe add a check of file to make sure it is not corrupt and is readable after the merge(Not sure how much of a problem this actually is, but this would not hurt).  Also the way my scripts work right now, is I have statically specified where the NaN values are and I am handling them per case, since we do not know what data we will get, a more robust method of detecting and dealing with NaN values will be needed.
-
-2. What are some things that could go wrong with our current pipeline that we are not able to address?  For your reference, read [this](https://snowplowanalytics.com/blog/2016/01/07/we-need-to-talk-about-bad-data-architecting-data-pipelines-for-data-quality/) for inspiration. (0.5 points)
-
-1. Kaggle changes links/ file locations/login process/ file content
-2. We run out of space on HD / local permissions issue - can't save files
-3. Someone updated python packages and there is unintended effect (functions retired or act differently)
-4. Docker issues - lost internet within docker due to some ip binding to vm or local routing issues( I guess this falls under lost internet, but I am talking more if docker is the cause rather then ISP)
 
 
+1. I would put in checks to make sure the number of columns and the data types match the format so that the processes that wrangles the data later on before running ml part does not break. Maybe add a check of file to make sure it is not corrupt and is readable after the merge(Not sure how much of a problem this actually is, but this would not hurt).  Also the way my scripts work right now, is I have statically specified where the NaN values are and I am handling them per case, since we do not know what data we will get, a more robust method of detecting and dealing with NaN values will be needed.
+
+2. 
+
+- Kaggle changes links/ file locations/login process/ file content
+- We run out of space on HD / local permissions issue - can't save files
+- Someone updated python packages and there is unintended effect (functions retired or act differently)
+- Docker issues - lost internet within docker due to some ip binding to vm or local routing issues( I guess this falls under lost internet, but I am talking more if docker is the cause rather then ISP)
 
 
-3. How would you build things differently if this dataset was 1 trillion rows? (0.5 points)
 
-We would need some kind of back engine like Hadoop or Spark to handle the data. Also we will need ability to process data in chunks, data pull would need to be done in chunks, with further checks, processing in chunks and so on, also I would probably separate pipeline into more steps(scripts), for example I would take all the data wrangling parts into a separate scripts.  If we have too much data to process we can't have multiple steps run at the same time as each one of those steps will be cpu and time consuming, so each step will have to be separated with more reporting/logging added in between each step. Trillion records sounds like a lot, so I would probably put some effort into monitoring of resources during the time my jobs run, With trillion records something will break sooner or later and if we have good overview of systems performance it will help with troubleshooting a lot.
 
-4. How would you build things differently if the testing/scoring dataset was refreshed on a daily frequency? (0.5 points)
+3. We would need some kind of back engine like Hadoop or Spark to handle the data. Also we will need ability to process data in chunks, data pull would need to be done in chunks, with further checks, processing in chunks and so on, also I would probably separate pipeline into more steps(scripts), for example I would take all the data wrangling parts into a separate scripts.  If we have too much data to process we can't have multiple steps run at the same time as each one of those steps will be cpu and time consuming, so each step will have to be separated with more reporting/logging added in between each step. Trillion records sounds like a lot, so I would probably put some effort into monitoring of resources during the time my jobs run, With trillion records something will break sooner or later and if we have good overview of systems performance it will help with troubleshooting a lot.
 
-I would add a cron job to check for differences daily, something like an rsync should get the job done, by checking if there is a change and pulling only the differences. Also if there is daily processing we will preferably need a more complex dependency based system where you check if last days jobs have completed successfully before moving on to the next day Same goes for steps within a day each one depends on completion of the other not just time based cron jobs.  Alerts ( email/texts) will be critical to have in place, they will be notifying successful completion of jobs or alert about a problem.
+
+
+4. I would add a cron job to check for differences daily, something like an rsync should get the job done, by checking if there is a change and pulling only the differences. Also if there is daily processing we will preferably need a more complex dependency based system where you check if last days jobs have completed successfully before moving on to the next day Same goes for steps within a day each one depends on completion of the other not just time based cron jobs.  Alerts ( email/texts) will be critical to have in place, they will be notifying successful completion of jobs or alert about a problem.

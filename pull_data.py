@@ -1,6 +1,7 @@
 #Joseph Elikishvili IS622 Hw2
 #This script collects username/pass form the user and uses it to login into kaggle and download titanic dataset in 2 csv files
-import os, getpass, base64, requests, shutil
+import os, getpass, base64, requests, shutil, sys
+import pandas as pd
 
 
 file = 'login'
@@ -11,9 +12,9 @@ test_file = 'test.csv'
 
 
 #handling ssl certificate location
-#os.environ['REQUESTS_CA_BUNDLE'] = os.path.join(
-#   '/usr/ssl/certs/',
-#   'ca-bundle.crt')
+os.environ['REQUESTS_CA_BUNDLE'] = os.path.join(
+   '/etc/ssl/certs/',
+   'ca-certificates.crt')
 
 
 #Function reads file, takes in file name as argument, returns list of lines
@@ -47,17 +48,22 @@ def login_encode(list):
     encoded_p = base64.b64encode(list[1].encode('utf-8'))
     return([encoded_u, encoded_p])
 
-#Function downloads a file, takes in file name, url and username/pass as arguments and saves file localy
+#Function downloads a file, takes in file name, url and username/pass as arguments, saves file localy and checks the file
 def download_file(file, url, u, p):
-    try:
-        r = requests.get(url)
-    except:
-        print("Could not connect, Check internet connection")
+
+    r = requests.get(url)
     payload= {'UserName': u, 'Password': p}
     r = requests.post(r.url, data = payload )
     f = open(file, 'wb')
     f.write(r.content)
     f.close()
+
+    #Check file contenets if Passangerid column is not present, raise an error
+    try:
+        df_temp = pd.read_csv(file)
+    except:
+        print("Not a valid file, check your credentials")
+        sys.exit(1)
 
 #Code for reading file in chunks. Not needed in this case as files are small.
     #for chunk in r.iter_content(chunk_size=512 * 1024):  # Reads 512KB at a time into memory
