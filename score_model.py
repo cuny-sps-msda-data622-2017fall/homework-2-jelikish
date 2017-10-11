@@ -14,7 +14,7 @@ model_file = 'model.pkl'
 def read_files():
     try:
         test_df = pd.read_csv("test.csv")
-        X_test = pd.read_csv("X_test.csv")
+        X_test = pd.read_csv("x_test.csv")
         y_test = pd.read_csv("y_test.csv")
     except:
         print("Could not read files")
