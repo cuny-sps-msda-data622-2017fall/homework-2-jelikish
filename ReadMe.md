@@ -76,3 +76,5 @@ Modify this ReadMe file to answer the following questions directly in place.
 4. I would add a cron job to check for differences daily, something like an rsync should get the job done, by checking if there is a change and pulling only the differences. Also if there is daily processing we will preferably need a more complex dependency based system where you check if last days jobs have completed successfully before moving on to the next day Same goes for steps within a day each one depends on completion of the other not just time based cron jobs.  Alerts ( email/texts) will be critical to have in place, they will be notifying successful completion of jobs or alert about a problem.
 
 ## Please make sure you press enter when running last script, The output was pretty odd inside my docker container so I show part of output then, you hit enter then script will output the rest.
+
+Also, if you use the wrong login/pass, you will have to delete login file. If file exists, it will just use whatever is in the file.
